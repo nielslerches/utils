@@ -1,6 +1,6 @@
 # Random stuff
 
-## Functional calculation magnitude for an n-dimensional vector
+## Functional calculation of magnitude for an n-dimensional vector
 ```python
 from math import sqrt
 from functools import reduce
