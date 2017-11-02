@@ -26,6 +26,12 @@ def paginate(s, x):
 # paginate([1, 2, 3, 4, 5], 3) == [[1, 2, 3], [4, 5]]
 ```
 
+## Omission of keys in dictionary (from [stackoverflow](https://stackoverflow.com/a/41010331))
+```python
+def omit(dictionary, *keys):
+    return {key: value for key, value in dictionary.items() if key not in keys}
+```
+
 ## Experiments
 ```python
 def round_up(x, n):
@@ -37,4 +43,20 @@ def round_up(x, n):
 
 # round_up(5, 8) == 8
 # round_up(14, 8) == 16
+```
+
+### Recursive normalization & denormalization of dictionaries
+```python
+def normalize(dictionary_list, key):
+    normalized_dictionary = {}
+    for dictionary in dictionary_list:
+        new_dictionary = {}
+        new_dictionary_keys = omit(dictionary, key).keys()
+        for dictionary_key in new_dictionary_keys:
+            if isinstance(dictionary[dictionary_key], list) and dictionary_key in dictionary.keys():
+                new_dictionary[dictionary_key] = normalize(dictionary[dictionary_key], key)
+            else:
+                new_dictionary[dictionary_key] = dictionary[dictionary_key]
+        normalized_dictionary[dictionary[key]] = new_dictionary
+    return normalized_dictionary
 ```
