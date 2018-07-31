@@ -17,11 +17,9 @@ paginate = lambda s, x: [s[i:i+x] for i in range(len(s)) if i % x == 0]
 and a version using less cycles:
 
 ```python
-def paginate(s, x):
-    if len(s) % x != 0:
-        return [s[i*x:i*x+x] for i in range(len(s) // x + 1]
-    else:
-        return [s[i*x:i*x+x] for i in range(len(s) // x)]
+def paginate(iterable, size):
+    length = len(iterable)
+    return [iterable[i*size:i*size+size] for i in range(length // size + min([1, length % size]))]
 
 # paginate([1, 2, 3, 4, 5], 3) == [[1, 2, 3], [4, 5]]
 ```
