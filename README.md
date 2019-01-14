@@ -37,7 +37,7 @@ def round_up(x, n):
     
     Rounds x _up_ to the nearest multiple of n.
     """
-    return (x // n) * n if x % n == 0 else (x // n + 1) * n
+    return (x // n + int(x % n != 0)) * n
 
 # round_up(5, 8) == 8
 # round_up(14, 8) == 16
