@@ -4,6 +4,7 @@
 ```python
 from math import sqrt
 from functools import reduce
+from itertools import islice
 
 mag = lambda u: sqrt(reduce(lambda s, _s: (s**2) + _s, u)) # mag([2, 1]) == 2.23606797749979
 ```
@@ -19,7 +20,7 @@ and a version using less cycles:
 ```python
 def paginate(iterable, size):
     length = len(iterable)
-    return [iterable[i*size:i*size+size] for i in range(length // size + min([1, length % size]))]
+    return (islice(iterable, i * size, i * size + size) for i in range(length // size + min(1, length % size)))
 
 # paginate([1, 2, 3, 4, 5], 3) == [[1, 2, 3], [4, 5]]
 ```
