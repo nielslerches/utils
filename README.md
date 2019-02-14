@@ -1,4 +1,4 @@
-# Random stuff
+# Useful and less useful utils
 
 ## Functional calculation of magnitude of an n-dimensional vector
 ```python
