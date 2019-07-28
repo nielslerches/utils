@@ -25,6 +25,23 @@ def paginate(iterable, size):
 # paginate([1, 2, 3, 4, 5], 3) == [[1, 2, 3], [4, 5]]
 ```
 
+## Nth order number of an unsorted set unsorted numbers (basically insort)
+```python
+def nth_order(n, iterable):
+    iterable = list(iterable).copy()
+    buffer = []
+    while iterable:
+        for i, buf in enumerate(buffer):
+            if iterable[0] < buf:
+                buffer.insert(i, iterable.pop(0))
+                break
+        else:
+            buffer.append(iterable.pop(0))
+    return buffer[n]
+
+# nth_order(1, [9, 4, 3, 5, 2])
+```
+
 ## Omission of keys in dictionary (from [stackoverflow](https://stackoverflow.com/a/41010331))
 ```python
 def omit(dictionary, *keys):
