@@ -6,7 +6,9 @@ from math import sqrt
 from functools import reduce
 from itertools import islice
 
-mag = lambda u: sqrt(reduce(lambda s, _s: (s**2) + _s, u)) # mag([2, 1]) == 2.23606797749979
+mag = lambda u: sqrt(reduce(lambda s, _s: (s**2) + _s, u))
+
+# mag([2, 1]) == 2.23606797749979
 ```
 
 ## Pagination
@@ -18,6 +20,8 @@ paginate = lambda s, x: [s[i:i+x] for i in range(len(s)) if i % x == 0]
 and a version using less cycles:
 
 ```python
+from itertools import islice
+
 def paginate(iterable, size):
     length = len(iterable)
     return (islice(iterable, i * size, i * size + size) for i in range(length // size + min(1, length % size)))
@@ -39,7 +43,7 @@ def nth_order(n, iterable):
             buffer.append(iterable.pop(0))
     return buffer[n]
 
-# nth_order(1, [9, 4, 3, 5, 2])
+# nth_order(1, [9, 4, 3, 5, 2]) == 3
 ```
 
 ## Omission of keys in dictionary (from [stackoverflow](https://stackoverflow.com/a/41010331))
