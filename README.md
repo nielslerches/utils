@@ -25,7 +25,7 @@ def paginate(iterable, size):
 # paginate([1, 2, 3, 4, 5], 3) == [[1, 2, 3], [4, 5]]
 ```
 
-## Nth order number of an unsorted set unsorted numbers (basically insort)
+## Nth order number of a set unsorted numbers (basically insort)
 ```python
 def nth_order(n, iterable):
     iterable = list(iterable).copy()
