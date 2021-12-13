@@ -1,5 +1,32 @@
 # Useful and less useful utils
 
+## Incremental mean value
+
+```python
+from dataclasses import dataclass
+from typing import Optional
+
+
+@dataclass
+class Mean:
+    count: int = 0
+    value: Optional[int | float] = None
+
+    def add(self, value: int | float):
+        self.count += 1
+        if self.value is None:
+            self.value = value
+        else:
+            self.value = ((self.value * (self.count - 1)) + value) / self.count
+        return self.value
+
+
+m = Mean()
+m.add(10)
+m.add(-20)
+m.add(40)
+```
+
 ## Functional calculation of magnitude of an n-dimensional vector
 ```python
 from math import sqrt
