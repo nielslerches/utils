@@ -1,5 +1,42 @@
 # Useful and less useful utils
 
+## SkipChain
+```python
+class SkipChain:
+    def __init__(self, *sliceables):
+        self.sliceables = sliceables
+
+    def __getitem__(self, slice: slice):
+        start = slice.start
+        stop = slice.stop
+        items = []
+        for sliceable in self.sliceables:
+            sliceable_len = len(sliceable)
+            if start > sliceable_len:
+                start -= sliceable_len
+                stop -= sliceable_len
+                continue
+            items_len = len(items)
+            items.extend(
+                sliceable[start -items_len:stop - items_len]
+            )
+            if len(items) >= (stop - start):
+                break
+        return items
+
+    def __len__(self):
+        return sum(len(sliceable) for sliceable in self.sliceables)
+
+
+print(SkipChain([0, 1, 2, 3], [4, 5, 6, 7, 8, 9])[0:10])
+print(SkipChain([0, 1, 2, 3], [4, 5, 6, 7, 8, 9])[0:9])
+print(SkipChain([0, 1, 2, 3], [4, 5, 6, 7, 8, 9])[0:8])
+print(SkipChain([0, 1, 2, 3], [4, 5, 6, 7, 8, 9])[0:5])
+print(SkipChain([0, 1, 2, 3], [4, 5, 6, 7, 8, 9])[0:4])
+print(SkipChain([0, 1, 2, 3], [4, 5, 6, 7, 8, 9])[5:9])
+
+```
+
 ## Incremental mean value
 
 ```python
